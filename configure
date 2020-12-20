@@ -556,7 +556,14 @@ PLATFORM_NOTES=
 if [ -z "$PLATFORM" ]; then
     case "$UNAME_SYSTEM:$UNAME_RELEASE" in
      Darwin:*)
-        PLATFORM=macx-clang
+        case "$UNAME_MACHINE" in
+            arm64)
+                PLATFORM=macx-clang-arm64
+                ;;
+            *)
+                PLATFORM=macx-clang-x64
+                ;;
+        esac
         ;;
      AIX:*)
         #PLATFORM=aix-g++
